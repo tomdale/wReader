@@ -1,0 +1,28 @@
+<div class="navbar-inner">
+  <div class="container">
+    <a class="brand">
+      wReader
+    </a>
+    <ul class="nav">
+      <li class="divider-vertical"></li>
+      <li class="itemCount"><a {{action showAll href="true"}}>{{totalCount}}</a></li>
+      <li class="divider-vertical"></li>
+      <li class="itemCount"><a {{action showUnread href="true"}}>{{unreadCount}} Unread</a></li>
+      <li class="divider-vertical"></li>
+      <li class="itemCount"><a {{action showStarred href="true"}}>{{starredCount}} Starred</a></li>
+      <li class="divider-vertical"></li>
+      <li class="itemCount"><a {{action showRead href="true"}}>{{readCount}} Read</a></li>
+      <li class="divider-vertical"></li>
+    </ul>
+    <form class="navbar-search pull-left" id="navSearch">
+      <input type="search" ng-model="$parent.search" class="search-query" placeholder="Search">
+    </form>
+    <ul class="nav pull-right">
+      <!--<li><a ng-click="showSettings()"><i class="icon-cog icon-white"></i></a></li>-->
+      <!--
+      <li><a {{action "showUserConfig" on="click"}}><i class="icon-user icon-white"></i></a></li>
+      -->
+      <li><a ng-click="refresh()" title="Refresh all feeds" alt="Refresh all feeds"><i class="icon-refresh icon-white"></i></a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{{#if content}}
+  <article class="well entry" {{bindAttr class="isRead:read isSelected:active"}}>
+    <div class="row-fluid">
+      <div class="span8">{{formattedDate}}19 hours ago</div>
+        <div class="span4 actions">
+          {{view Ember.Checkbox class="read" checkedBinding="isUnread"}}
+          {{view Ember.Checkbox class="star" checkedBinding="isStarred"}}
+          <a href="{{link}}"><i class="icon-share"></i></a>
+        </div>
+      </div>
+      <h2>{{title}}</h2>
+      <span class="author">{{author}}</span> - <span class="pub-name">{{feedName}}</span>
+      <hr />
+      <p class="post-content">{{{content}}}</p>
+    </div>
+  </article>
+{{else}}
+  <div class="nothingSelected">
+    <img src="/assets/img/sadpanda.png" alt="Sad Panda" title="Sad Panda">
+    <p>Nothing selected.</p>
+  </div>
+{{/if}}

@@ -1,0 +1,15 @@
+{{#each controller}}
+  <article
+    {{action selectItem}}
+    {{bindAttr class=":well :summary read isSelected:active"}}>
+    <div class="row-fluid" >
+      <div class="span6 pub-name">
+        {{pub_name}}
+      </div>
+      <div class="span6 pub-date">
+        {{formattedDate}}
+      </div>
+    </div>
+    <h3 class="pub-title">{{title}}</h3>
+  </article>
+{{/each}}
