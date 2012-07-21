@@ -1,30 +1,22 @@
-var getFeedItems = function() {
-  var items = [{
-    id: 1,
-    title: "A cool post",
-    description: "What is going on",
-    isUnread: true,
-    date: Date.now()
-  },
-
-  {
-    id: 2,
-    title: "Chrome@IO",
-    description: "Probably a lot of cool stuff?",
-    date: Date.now()
-  },
-
-  {
-    id: 3,
-    title: "NPAPI plug-ins in Windows 8 Metro mode",
-    date: Date.now(),
-    isStarred: true
-  }];
-
-  return items.map(function(item) {
-    return Rss.FeedItem.create(item);
+var populateArray = function(array, success) {
+  $.ajax({
+    dataType: 'jsonp',
+    url: "http://blog.chromium.org/feeds/posts/default?alt=json",
+    success: function(data) {
+      data.feed.entry.forEach(function(entry) {
+        array.pushObject(Rss.FeedItem.create({
+          title: entry.title.$t,
+          id: entry.id.$t,
+          publicationName: data.feed.title.$t,
+          author: entry.author[0].name.$t,
+          date: new Date(entry.published.$t),
+          text: entry.content.$t,
+        }));
+      });
+    }
   });
 };
+
 
 Rss.Router = Ember.Router.extend({
   root: Ember.Route.extend({
@@ -43,7 +35,10 @@ Rss.Router = Ember.Router.extend({
         applicationController.connectOutlet('feedItem', 'feedItem');
         applicationController.connectOutlet('controls', 'controls');
 
-        feedItemsController.set('content', getFeedItems());
+        var items = [];
+        populateArray(items);
+
+        feedItemsController.set('content', items);
 
         controlsController.setProperties({
           feedItems: feedItemsController,

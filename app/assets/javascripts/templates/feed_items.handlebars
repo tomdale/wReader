@@ -1,10 +1,10 @@
 {{#each controller}}
   <article
     {{action selectItem}}
-    {{bindAttr class=":well :summary read isSelected:active"}}>
+    {{bindAttr class=":well :summary isRead:read isSelected:active"}}>
     <div class="row-fluid" >
       <div class="span6 pub-name">
-        {{pub_name}}
+        {{publicationName}}
       </div>
       <div class="span6 pub-date">
         {{formattedDate}}
