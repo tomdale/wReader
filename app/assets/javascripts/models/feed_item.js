@@ -1,17 +1,17 @@
-Rss.FeedItem = Ember.Object.extend({
-  // title: DS.attr('string'),
-  // author: DS.attr('string'),
-  // link: DS.attr('string'),
-  // description: DS.attr('string'),
-  // shortDescription: DS.attr('string'),
-  // date: DS.attr('date'),
-  isUnread: true,
+Rss.FeedItem = DS.Model.extend({
+  title: DS.attr('string'),
+  publicationName: DS.attr('string'),
+  author: DS.attr('string'),
+  text: DS.attr('string'),
+  date: DS.attr('date'),
 
-  isRead: function() {
-    return !this.get('isUnread')
-  }.property('isUnread'),
+  isRead: false,
+  isStarred: DS.attr('boolean'),
 
-  isStarred: false,
+  isUnread: function() {
+    return !this.get('isRead')
+  }.property('isRead'),
+
 
   isUnstarred: function() {
     return !this.get('isStarred');

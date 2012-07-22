@@ -1,4 +1,5 @@
 Rss.ControlsController = Ember.Controller.extend({
-  // Implement your controller here.
+  feedItemsBinding: 'target.feedItemsController',
+  selectedItemBinding: 'target.feedItemController'
 });
 

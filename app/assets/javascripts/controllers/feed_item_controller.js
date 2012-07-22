@@ -1,8 +1,4 @@
 Rss.FeedItemController = Ember.ObjectController.extend({
-  contentBinding: 'feedItems.selectedItem',
-
-  feedItems: null,
-
-
+  contentBinding: 'target.feedItemsController.selectedItem',
+  feedItems: null
 });
-

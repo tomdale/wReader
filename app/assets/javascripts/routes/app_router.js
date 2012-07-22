@@ -1,56 +1,18 @@
-var populateArray = function(array, success) {
-  $.ajax({
-    dataType: 'jsonp',
-    url: "http://blog.chromium.org/feeds/posts/default?alt=json",
-    success: function(data) {
-      data.feed.entry.forEach(function(entry) {
-        array.pushObject(Rss.FeedItem.create({
-          title: entry.title.$t,
-          id: entry.id.$t,
-          publicationName: data.feed.title.$t,
-          author: entry.author[0].name.$t,
-          date: new Date(entry.published.$t),
-          text: entry.content.$t,
-        }));
-      });
-    }
-  });
-};
-
-
 Rss.Router = Ember.Router.extend({
   root: Ember.Route.extend({
     connectOutlets: function(router) {
       Ember.run.next(function() {
-        var applicationController = router.get('applicationController'),
-            feedItemsController = router.get('feedItemsController'),
-            controlsController = router.get('controlsController');
+        var appController = router.get('applicationController');
+        var feedItems = Rss.FeedItem.find();
 
-        applicationController.connectOutlet({
-          outletName: 'feedItems',
-          viewClass: Rss.FeedItemsView,
-          controller: router.get('filteredFeedItemsController'),
-        });
+        appController.connectOutlet('feedItems', 'feedItems', feedItems);
+        appController.connectOutlet('feedItem', 'feedItem');
+        appController.connectOutlet('controls', 'controls');
 
-        applicationController.connectOutlet('feedItem', 'feedItem');
-        applicationController.connectOutlet('controls', 'controls');
-
-        var items = [];
-        populateArray(items);
-
-        feedItemsController.set('content', items);
-
-        controlsController.setProperties({
-          feedItems: feedItemsController,
-          selectedItem: router.get('feedItemController')
-        });
-
-        router.get('feedItemController').set('feedItems', feedItemsController);
-
-        router.get('applicationController').connectOutlet({
+        appController.connectOutlet({
           outletName: 'navbar',
           viewClass: Rss.NavBarView,
-          controller: feedItemsController
+          controller: router.get('feedItemsController')
         });
       });
     },
@@ -79,10 +41,6 @@ Rss.Router = Ember.Router.extend({
 
     selectNext: function(router) {
       router.get('feedItemsController').selectNext();
-    },
-
-    enter: function() {
-      console.log('enter');
     },
 
     showAll: function(router) {
@@ -122,7 +80,7 @@ Rss.Router = Ember.Router.extend({
       }),
 
       show: Ember.Route.extend({
-        route: '/item/:id',
+        route: '/item/:feed_item_id',
 
         connectOutlets: function(router, item) {
           router.get('feedItemsController').select(item);

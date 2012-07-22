@@ -21,7 +21,7 @@ Rss.FeedItemsController = Ember.ArrayController.extend({
 
   markAllAsRead: function() {
     this.forEach(function(item) {
-      item.set('isUnread', false);
+      item.set('isRead', true);
     });
   },
 
@@ -45,7 +45,7 @@ Rss.FeedItemsController = Ember.ArrayController.extend({
     }
 
     item.set('isSelected', true);
-    item.set('isUnread', false);
+    item.set('isRead', true);
 
     this.set('selectedItem', item);
     this.set('selectedIndex', this.indexOf(item));

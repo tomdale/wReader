@@ -1,3 +1,3 @@
 class FeedItemSerializer < ActiveModel::Serializer
-  attributes :id, :title, :author, :link, :description, :short_description, :date, :read, :starred
+  attributes :id, :title, :publication_name, :author, :link, :text, :date, :is_read, :is_starred
 end
