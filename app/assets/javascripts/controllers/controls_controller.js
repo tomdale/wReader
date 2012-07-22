@@ -1,5 +1,1 @@
-Rss.ControlsController = Ember.Controller.extend({
-  feedItemsBinding: 'target.feedItemsController',
-  selectedItemBinding: 'target.feedItemController'
-});
-
+Rss.ControlsController = Ember.Controller.extend();

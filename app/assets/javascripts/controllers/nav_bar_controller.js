@@ -1,4 +1,1 @@
-Rss.NavBarController = Ember.ObjectController.extend({
-  // Implement your controller here.
-});
-
+Rss.NavBarController = Ember.ObjectController.extend();

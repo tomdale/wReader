@@ -1,6 +1,6 @@
-{{#each controller}}
+{{#each filteredContent}}
   <article
-    {{action selectItem}}
+    {{action selectItem this}}
     {{bindAttr class=":well :summary isRead:read isSelected:active"}}>
     <div class="row-fluid" >
       <div class="span6 pub-name">

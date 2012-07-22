@@ -1,4 +1,12 @@
 Rss.FeedItemController = Ember.ObjectController.extend({
-  contentBinding: 'target.feedItemsController.selectedItem',
-  feedItems: null
+  feedItemsController: null,
+  contentBinding: 'feedItemsController.selectedItem',
+
+  toggleStar: function() {
+    this.toggleProperty('isStarred');
+  },
+
+  toggleRead: function() {
+    this.toggleProperty('isRead');
+  }
 });

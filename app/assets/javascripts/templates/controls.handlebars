@@ -1,20 +1,27 @@
 <div class="tControls">
+
   <div class="top">
-    <button {{action markAllAsRead}} class="btn" title="Mark all as read" alt="Mark all as read"><i class="icon-ok"></i></button>
+    <button {{action markAllAsRead target="feedItemsController"}} class="btn" title="Mark all as read" alt="Mark all as read"><i class="icon-ok"></i></button>
   </div>
+
   <div class="middle">
-    <button {{action selectPrevious}} {{bindAttr disabled="feedItems.firstItemSelected"}} class="btn"><i class="icon-arrow-up"></i></button>
-    <button {{action toggleStar context="selectedItem"}} {{bindAttr disabled="feedItems.hasNoSelection"}} class="btn">
-      <i {{bindAttr class="selectedItem.isStarred:icon-star selectedItem.isUnstarred:icon-star-empty"}}></i>
+    <button {{action selectPrevious target="feedItemsController"}} {{bindAttr disabled="feedItemsController.isFirstItemSelected"}} class="btn"><i class="icon-arrow-up"></i></button>
+
+    <button {{action toggleStar target="feedItemController"}} {{bindAttr disabled="feedItemsController.hasNoSelection"}} class="btn">
+      <i {{bindAttr class="feedItemController.isStarred:icon-star feedItemController.isUnstarred:icon-star-empty"}}></i>
     </button>
-    <button {{action toggleUnread context="selectedItem"}} {{bindAttr disabled="feedItems.hasNoSelection"}} class="btn">
-      <i {{bindAttr class="selectedItem.isRead:icon-ok-sign selectedItem.isUnread:icon-ok-circle"}}></i>
+
+    <button {{action toggleRead target="feedItemController"}} {{bindAttr disabled="feedItemsController.hasNoSelection"}} class="btn">
+      <i {{bindAttr class="feedItemController.isRead:icon-ok-sign feedItemController.isUnread:icon-ok-circle"}}></i>
     </button>
-    <button {{action selectNext}} {{bindAttr disabled="feedItems.lastItemSelected"}} class="btn"><i class="icon-arrow-down"></i></button>
+
+    <button {{action selectNext target="feedItemsController"}} {{bindAttr disabled="feedItemsController.isLastItemSelected"}} class="btn"><i class="icon-arrow-down"></i></button>
   </div>
+
   <div class="bottom">
-    <button ng-click="items.refresh()" class="btn" title="Refresh feeds" alt="Refresh feeds">
+    <button class="btn" title="Refresh feeds" alt="Refresh feeds">
       <i class="icon-refresh"></i>
     </button>
   </div>
+
 </div>
