@@ -7,5 +7,7 @@ To get started, check out this repository, then run:
 
 ```
 bundle
+rake db:migrate
+rake db:seed
 rails s
 ```
